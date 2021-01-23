@@ -1,0 +1,19 @@
+[
+  {
+    "name": "ssn;social security;social",
+    "type": "SSN"
+  },
+  {
+    "name": "cc;credit card",
+    "type": "Credit Card #"
+  },
+  {
+    "name": "phone;phone-number;number",
+    "type": "Phone"
+  },
+  {
+    "name": "name;fullname;full name",
+    "type": "Full Name"
+  }
+]
+

@@ -1,0 +1,11 @@
+.idea
+.vscode
+.DS_Store
+env
+*.pkl
+*.csv
+output*
+output.zip
+__pycache__
+scratch.py
+

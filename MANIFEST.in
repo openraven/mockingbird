@@ -1,0 +1,2 @@
+include mockingbird/configurable/_default_config.yml
+include mockingbird/mockaroo_csv_api/sample_schema.json
