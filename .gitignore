@@ -142,3 +142,8 @@ cython_debug/
 *.prefs
 .pydevproject
 .vscode
+
+
+# personal
+
+scratch.py
