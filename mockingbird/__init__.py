@@ -33,8 +33,8 @@ class Mockingbird(__BaseDocument):
     all_documents.extend(_structured_data_all)
     all_documents.extend(_unstructured_data_all)
 
-    def __init__(self, file_minimum=100):
-        super().__init__(extension="mockingbird")
+    def __init__(self, file_minimum=100, config_file=None):
+        super().__init__(extension="mockingbird", config_file=config_file)
 
         # Create a list of key to classes mappings
         self.__extension_to_classes = {}
@@ -79,7 +79,7 @@ class Mockingbird(__BaseDocument):
 
                 # Create an object for each class selected
                 child_class = doc_array[x]
-                child_object = child_class()
+                child_object = child_class(config_file=self._config_file)
 
                 # Clone over the sensitive-data in "self" into all the children objects.
                 child_object.clone_sensitive_data(other=self)

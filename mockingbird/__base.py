@@ -51,13 +51,21 @@ class __BaseDocument(ABC):
         self._sensitive_data_mappings = dict()
 
         # lower and upper bounds for _total_entries
-        self._configurable_settings_name = "_default_config.yml"
         self._configurable_dict: Dict[str, str]
         self.__upper_bound_delta: int
         self._total_entries: int = 0
 
-        if config_file is None:
+        self._config_file = config_file
+
+        # load the default config found in this folder if not set at a higher level
+        if self._config_file is None:
             self._configurable_dict = self.__load_default_yaml()
+
+        # load the user defined config
+        else:
+            with open(self._config_file) as fh:
+                self._configurable_dict = yaml.load(fh, Loader=yaml.FullLoader)
+
 
         self.__upper_bound_delta = self._configurable_dict["base_document"]["upper_bounds_delta"]
         self._total_entries = self._get_random_bounded_value()
