@@ -19,7 +19,7 @@ from typing import final
 
 from pptx import Presentation
 
-from mockingbird.__base import __BaseDocument
+from .__base import __BaseDocument
 from .__base import __BaseUnstructuredDataType
 
 

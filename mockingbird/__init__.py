@@ -16,9 +16,9 @@
 
 from typing import final
 
-from mockingbird.__base import __BaseDocument
-from mockingbird.structured_data_document import __all_classes__ as _structured_data_all
-from mockingbird.unstructured_data_document import __all_classes__ as _unstructured_data_all
+from .__base import __BaseDocument
+from .structured_data_document import __all_classes__ as _structured_data_all
+from .unstructured_data_document import __all_classes__ as _unstructured_data_all
 
 
 class Mockingbird(__BaseDocument):

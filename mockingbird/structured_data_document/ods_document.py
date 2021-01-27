@@ -18,7 +18,7 @@ from typing import final
 
 from pyexcel_ods import save_data
 
-from mockingbird.structured_data_document.__base import __BaseStructuredDataType
+from .__base import __BaseStructuredDataType
 
 
 class ODSDocument(__BaseStructuredDataType):

@@ -17,7 +17,7 @@
 import csv
 from typing import final
 
-from mockingbird.structured_data_document.__base import __BaseStructuredDataType
+from .__base import __BaseStructuredDataType
 
 
 class CSVDocument(__BaseStructuredDataType):

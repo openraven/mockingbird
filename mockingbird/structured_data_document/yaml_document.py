@@ -19,7 +19,7 @@ from typing import final
 
 import yaml
 
-from mockingbird.structured_data_document.__base import __BaseStructuredDataType
+from .__base import __BaseStructuredDataType
 
 
 class YAMLDocument(__BaseStructuredDataType):

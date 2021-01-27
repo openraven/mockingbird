@@ -19,7 +19,7 @@ from typing import final
 
 from docx import Document
 
-from mockingbird.__base import __BaseDocument
+from .__base import __BaseDocument
 from .__base import __BaseUnstructuredDataType
 
 

@@ -25,7 +25,7 @@ from typing import final, List, Dict
 import yaml
 from random_words import RandomWords
 
-from mockingbird._meta_data import _MetaData
+from ._meta_data import _MetaData
 
 
 class __BaseDocument(ABC):
