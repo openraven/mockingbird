@@ -23,10 +23,11 @@ from .__base import __BaseStructuredDataType
 
 
 class XLSXDocument(__BaseStructuredDataType):
+    EXT = "xlsx"
 
     @final
     def __init__(self, config_file=None):
-        super().__init__(extension="xlsx", config_file=config_file)
+        super().__init__(extension=XLSXDocument.EXT, config_file=config_file)
 
     @final
     def save(self, save_path: str) -> None:

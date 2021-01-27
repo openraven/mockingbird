@@ -25,9 +25,11 @@ from .__base import __BaseUnstructuredDataType
 
 class PPTXDocument(__BaseDocument):
 
+    EXT = "pptx"
+
     @final
     def __init__(self, config_file=None):
-        super().__init__(extension="pptx",config_file=config_file)
+        super().__init__(extension=PPTXDocument.EXT,config_file=config_file)
 
         # Create a list of docx formats we're going to export.
         self._docx_styles = []

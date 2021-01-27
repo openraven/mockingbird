@@ -22,8 +22,11 @@ from .__base import __BaseUnstructuredDataType
 
 
 class TXTDocument(__BaseDocument):
+
+    EXT = "txt"
+
     def __init__(self, config_file=None):
-        super().__init__(extension="txt", config_file=config_file)
+        super().__init__(extension=TXTDocument.EXT, config_file=config_file)
 
         # Create a list of docx formats we're going to export.
         self._styles = []

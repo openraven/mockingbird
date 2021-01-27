@@ -23,9 +23,11 @@ from .__base import __BaseStructuredDataType
 
 class ODSDocument(__BaseStructuredDataType):
 
+    EXT = "ods"
+
     @final
     def __init__(self, config_file=None):
-        super().__init__(extension="ods", config_file=config_file)
+        super().__init__(extension=ODSDocument.EXT, config_file=config_file)
 
     @final
     def save(self, save_path: str) -> None:

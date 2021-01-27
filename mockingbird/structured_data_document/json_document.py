@@ -22,10 +22,11 @@ from .__base import __BaseStructuredDataType
 
 
 class JSONDocument(__BaseStructuredDataType):
+    EXT = "json"
 
     @final
     def __init__(self, config_file=None):
-        super().__init__(extension="json", config_file=config_file)
+        super().__init__(extension=JSONDocument.EXT, config_file=config_file)
 
         # todo, add to configurable
         self.indent = random.randint(0, 25)  # formatting stuff

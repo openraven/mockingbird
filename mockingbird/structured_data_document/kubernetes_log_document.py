@@ -20,10 +20,11 @@ from .__base import __BaseStructuredDataType
 
 
 class KubernetesLogDocument(__BaseStructuredDataType):
+    EXT = "log"
 
     @final
     def __init__(self, config_file=None):
-        super().__init__(extension="log", config_file=config_file)
+        super().__init__(extension=KubernetesLogDocument.EXT, config_file=config_file)
 
     @final
     def save(self, save_path: str) -> None:

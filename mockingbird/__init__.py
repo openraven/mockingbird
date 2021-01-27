@@ -39,12 +39,12 @@ class Mockingbird(__BaseDocument):
         # Create a list of key to classes mappings
         self.__extension_to_classes = {}
         for document_type in Mockingbird.all_documents:
-            # Need to instantiate the class to get the extension string.
-            instantiated_document = document_type()
-            assert instantiated_document.extension not in self.__extension_to_classes, \
-                "overlapping extensions! %s " % instantiated_document.extension
+            extension = document_type.EXT
 
-            self.__extension_to_classes[instantiated_document.extension] = document_type
+            assert extension not in self.__extension_to_classes, \
+                "overlapping extensions! %s " % extension
+
+            self.__extension_to_classes[extension] = document_type
 
         self._file_extensions = []
         self._file_minimum = file_minimum

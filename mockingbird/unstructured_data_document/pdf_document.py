@@ -26,10 +26,11 @@ class PDFDocument(__BaseDocument):
     Writes PDF's containing sensitive-text to a single page. This will be expanded on in the future, as it's
     functionality is fairly limited.
     """
+    EXT = "pdf"
 
     @final
     def __init__(self, config_file=None):
-        super().__init__(extension="pdf", config_file=config_file)
+        super().__init__(extension=PDFDocument.EXT, config_file=config_file)
 
         # Create a list of docx formats we're going to export.
         self._docx_styles = []
