@@ -23,8 +23,8 @@ from mockingbird.structured_data_document.__base import __BaseStructuredDataType
 class CSVDocument(__BaseStructuredDataType):
 
     @final
-    def __init__(self):
-        super().__init__(extension="csv")
+    def __init__(self, config_file=None):
+        super().__init__(extension="csv", config_file=config_file)
 
     @final
     def save(self, save_path: str) -> None:

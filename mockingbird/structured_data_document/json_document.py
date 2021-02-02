@@ -24,8 +24,8 @@ from mockingbird.structured_data_document.__base import __BaseStructuredDataType
 class JSONDocument(__BaseStructuredDataType):
 
     @final
-    def __init__(self):
-        super().__init__(extension="json")
+    def __init__(self, config_file=None):
+        super().__init__(extension="json", config_file=config_file)
 
         # todo, add to configurable
         self.indent = random.randint(0, 25)  # formatting stuff

@@ -25,8 +25,8 @@ from mockingbird.structured_data_document.__base import __BaseStructuredDataType
 class YAMLDocument(__BaseStructuredDataType):
 
     @final
-    def __init__(self):
-        super().__init__(extension="yaml")
+    def __init__(self, config_file=None):
+        super().__init__(extension="yaml", config_file=config_file)
         self.indent = random.randint(0, 25)  # formatting stuff
 
     @final

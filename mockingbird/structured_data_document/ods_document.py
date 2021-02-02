@@ -24,8 +24,8 @@ from mockingbird.structured_data_document.__base import __BaseStructuredDataType
 class ODSDocument(__BaseStructuredDataType):
 
     @final
-    def __init__(self):
-        super().__init__(extension="ods")
+    def __init__(self, config_file=None):
+        super().__init__(extension="ods", config_file=config_file)
 
     @final
     def save(self, save_path: str) -> None:
