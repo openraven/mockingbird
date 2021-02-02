@@ -22,8 +22,8 @@ from .__base import __BaseUnstructuredDataType
 
 
 class TXTDocument(__BaseDocument):
-    def __init__(self):
-        super().__init__(extension="txt")
+    def __init__(self, config_file=None):
+        super().__init__(extension="txt", config_file=config_file)
 
         # Create a list of docx formats we're going to export.
         self._styles = []
@@ -50,8 +50,8 @@ class TXTDocument(__BaseDocument):
 
 class _TxtParagraphStyle(__BaseUnstructuredDataType):
 
-    def __init__(self):
-        super().__init__(extension="txt")
+    def __init__(self, config_file=None):
+        super().__init__(extension="txt", config_file=config_file)
 
     @final
     def save(self, save_path: str) -> None:
@@ -69,8 +69,8 @@ class _TxtParagraphStyle(__BaseUnstructuredDataType):
 
 
 class _TxtBulletPointStyle(__BaseUnstructuredDataType):
-    def __init__(self):
-        super().__init__(extension="txt")
+    def __init__(self, config_file=None):
+        super().__init__(extension="txt", config_file=config_file)
 
     @final
     def save(self, save_path: str) -> None:
@@ -92,8 +92,8 @@ class _TxtBulletPointStyle(__BaseUnstructuredDataType):
 
 class _TxtChatStyle(__BaseUnstructuredDataType):
 
-    def __init__(self):
-        super().__init__(extension="txt")
+    def __init__(self, config_file=None):
+        super().__init__(extension="txt", config_file=config_file)
 
     @final
     def save(self, save_path: str) -> None:
