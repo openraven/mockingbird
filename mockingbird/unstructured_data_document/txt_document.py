@@ -22,7 +22,6 @@ from .__base import __BaseUnstructuredDataType
 
 
 class TXTDocument(__BaseDocument):
-
     EXT = "txt"
 
     def __init__(self, config_file=None):
