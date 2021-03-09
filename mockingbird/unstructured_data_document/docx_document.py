@@ -19,13 +19,15 @@ from typing import final
 
 from docx import Document
 
-from mockingbird.__base import __BaseDocument
+from .__base import __BaseDocument
 from .__base import __BaseUnstructuredDataType
 
 
 class DOCXDocument(__BaseDocument):
+    EXT = "docx"
+
     def __init__(self, config_file=None):
-        super().__init__(extension="docx", config_file=config_file)
+        super().__init__(extension=DOCXDocument.EXT, config_file=config_file)
 
         # Create a list of docx formats we're going to export.
         self._docx_styles = []
