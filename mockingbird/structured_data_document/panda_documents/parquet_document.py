@@ -16,25 +16,21 @@
 
 from typing import final
 
-import pandas
-import pandavro
-
-from .__base import __BaseStructuredDataType
+from ..panda_documents.__base import __BasePandaDocument
 
 
-class AvroDocument(__BaseStructuredDataType):
-    EXT = "avro"
+class ParquetDocument(__BasePandaDocument):
+
+    EXT = "parquet"
 
     def __init__(self, config_file=None):
-        super().__init__(extension=AvroDocument.EXT, config_file=config_file)
+        super().__init__(extension=ParquetDocument.EXT, config_file=config_file)
 
     @final
     def save(self, save_path: str) -> None:
-        save_file = self.setup_save_file(save_path=save_path, extension="avro")
+        save_file = self.setup_save_file(save_path=save_path, extension=self.extension)
 
-        structured_data = self._get_structured_data()
-
-        dataframe = pandas.DataFrame.from_dict(structured_data)
-        pandavro.to_avro(save_file, dataframe)
+        dataframe = self._get_data_frame()
+        dataframe.to_parquet(save_file)
 
         self._log_save(save_file)
