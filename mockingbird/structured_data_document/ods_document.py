@@ -22,7 +22,6 @@ from .__base import __BaseStructuredDataType
 
 
 class ODSDocument(__BaseStructuredDataType):
-
     EXT = "ods"
 
     @final

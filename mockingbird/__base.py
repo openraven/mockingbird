@@ -66,7 +66,6 @@ class __BaseDocument(ABC):
             with open(self._config_file) as fh:
                 self._configurable_dict = yaml.load(fh, Loader=yaml.FullLoader)
 
-
         self.__upper_bound_delta = self._configurable_dict["base_document"]["upper_bounds_delta"]
         self._total_entries = self._get_random_bounded_value()
 
