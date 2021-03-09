@@ -19,15 +19,13 @@ from typing import final
 
 from docx import Document
 
-from .__base import __BaseDocument
+from mockingbird.__base import __BaseDocument
 from .__base import __BaseUnstructuredDataType
 
 
 class DOCXDocument(__BaseDocument):
-    EXT = "docx"
-
-    def __init__(self, config_file=None):
-        super().__init__(extension=DOCXDocument.EXT, config_file=config_file)
+    def __init__(self):
+        super().__init__(extension="docx")
 
         # Create a list of docx formats we're going to export.
         self._docx_styles = []
@@ -49,7 +47,7 @@ class DOCXDocument(__BaseDocument):
     def save(self, save_path: str) -> None:
 
         for style in self._docx_styles:
-            instantiated_style = style(config_file=self._config_file)
+            instantiated_style = style()
             instantiated_style.clone_sensitive_data(other=self)
             instantiated_style.save(save_path=save_path)
             self._meta_data_object.add_other_meta_data(instantiated_style._meta_data_object)
@@ -60,8 +58,8 @@ class _DocxParagraphStyle(__BaseUnstructuredDataType):
     Writes a simple paragraph containing sensitive-soup.
     """
 
-    def __init__(self, config_file=None):
-        super().__init__(extension="docx", config_file=config_file)
+    def __init__(self):
+        super().__init__(extension="docx")
 
     @final
     def save(self, save_path: str) -> None:
@@ -84,8 +82,8 @@ class _DocxFooterStyle(__BaseUnstructuredDataType):
     Writes a simple document with sensitive-soup in the footer.
     """
 
-    def __init__(self, config_file=None):
-        super().__init__(extension="docx", config_file=config_file)
+    def __init__(self):
+        super().__init__(extension="docx")
 
     @final
     def save(self, save_path: str) -> None:
@@ -111,8 +109,8 @@ class _DocxBulletPointStyle(__BaseUnstructuredDataType):
     Writes a simple document with sensitive-soup in the footer.
     """
 
-    def __init__(self, config_file=None):
-        super().__init__(extension="docx", config_file=config_file)
+    def __init__(self):
+        super().__init__(extension="docx")
 
     @final
     def save(self, save_path: str) -> None:
@@ -142,8 +140,8 @@ class _DocxChatStyle(__BaseUnstructuredDataType):
     Writes a simple document with sensitive-soup in the footer.
     """
 
-    def __init__(self, config_file=None):
-        super().__init__(extension="docx", config_file=config_file)
+    def __init__(self):
+        super().__init__(extension="docx")
 
     @final
     def save(self, save_path: str) -> None:

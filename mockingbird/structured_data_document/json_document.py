@@ -18,15 +18,14 @@ import json
 import random
 from typing import final
 
-from .__base import __BaseStructuredDataType
+from mockingbird.structured_data_document.__base import __BaseStructuredDataType
 
 
 class JSONDocument(__BaseStructuredDataType):
-    EXT = "json"
 
     @final
-    def __init__(self, config_file=None):
-        super().__init__(extension=JSONDocument.EXT, config_file=config_file)
+    def __init__(self):
+        super().__init__(extension="json")
 
         # todo, add to configurable
         self.indent = random.randint(0, 25)  # formatting stuff

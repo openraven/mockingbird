@@ -16,15 +16,14 @@
 
 from typing import final
 
-from .__base import __BaseStructuredDataType
+from mockingbird.structured_data_document.__base import __BaseStructuredDataType
 
 
 class KubernetesLogDocument(__BaseStructuredDataType):
-    EXT = "log"
 
     @final
-    def __init__(self, config_file=None):
-        super().__init__(extension=KubernetesLogDocument.EXT, config_file=config_file)
+    def __init__(self):
+        super().__init__(extension="log")
 
     @final
     def save(self, save_path: str) -> None:

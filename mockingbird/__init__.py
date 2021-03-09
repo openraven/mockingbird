@@ -16,9 +16,9 @@
 
 from typing import final
 
-from .__base import __BaseDocument
-from .structured_data_document import __all_classes__ as _structured_data_all
-from .unstructured_data_document import __all_classes__ as _unstructured_data_all
+from mockingbird.__base import __BaseDocument
+from mockingbird.structured_data_document import __all_classes__ as _structured_data_all
+from mockingbird.unstructured_data_document import __all_classes__ as _unstructured_data_all
 
 
 class Mockingbird(__BaseDocument):
@@ -33,18 +33,18 @@ class Mockingbird(__BaseDocument):
     all_documents.extend(_structured_data_all)
     all_documents.extend(_unstructured_data_all)
 
-    def __init__(self, file_minimum=100, config_file=None):
-        super().__init__(extension="mockingbird", config_file=config_file)
+    def __init__(self, file_minimum=100):
+        super().__init__(extension="mockingbird")
 
         # Create a list of key to classes mappings
         self.__extension_to_classes = {}
         for document_type in Mockingbird.all_documents:
-            extension = document_type.EXT
+            # Need to instantiate the class to get the extension string.
+            instantiated_document = document_type()
+            assert instantiated_document.extension not in self.__extension_to_classes, \
+                "overlapping extensions! %s " % instantiated_document.extension
 
-            assert extension not in self.__extension_to_classes, \
-                "overlapping extensions! %s " % extension
-
-            self.__extension_to_classes[extension] = document_type
+            self.__extension_to_classes[instantiated_document.extension] = document_type
 
         self._file_extensions = []
         self._file_minimum = file_minimum
@@ -79,7 +79,7 @@ class Mockingbird(__BaseDocument):
 
                 # Create an object for each class selected
                 child_class = doc_array[x]
-                child_object = child_class(config_file=self._config_file)
+                child_object = child_class()
 
                 # Clone over the sensitive-data in "self" into all the children objects.
                 child_object.clone_sensitive_data(other=self)

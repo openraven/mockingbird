@@ -19,16 +19,15 @@ from typing import final
 
 from pptx import Presentation
 
-from .__base import __BaseDocument
+from mockingbird.__base import __BaseDocument
 from .__base import __BaseUnstructuredDataType
 
 
 class PPTXDocument(__BaseDocument):
-    EXT = "pptx"
 
     @final
-    def __init__(self, config_file=None):
-        super().__init__(extension=PPTXDocument.EXT, config_file=config_file)
+    def __init__(self):
+        super().__init__(extension="pptx")
 
         # Create a list of docx formats we're going to export.
         self._docx_styles = []
@@ -55,8 +54,8 @@ class _PPTXParagraphStyle(__BaseUnstructuredDataType):
     Writes a simple paragraph containing sensitive-soup.
     """
 
-    def __init__(self, config_file=None):
-        super().__init__(extension="pptx", config_file=config_file)
+    def __init__(self):
+        super().__init__(extension="pptx")
 
     @final
     def save(self, save_path: str) -> None:
@@ -82,8 +81,8 @@ class _PPTXBulletPointStyle(__BaseUnstructuredDataType):
     Writes a simple powerpoint with sensitive-soup in a bullet point.
     """
 
-    def __init__(self, config_file=None):
-        super().__init__(extension="pptx", config_file=config_file)
+    def __init__(self):
+        super().__init__(extension="pptx")
 
     @final
     def save(self, save_path: str) -> None:
