@@ -19,7 +19,7 @@ from collections import OrderedDict
 from random import randint
 from typing import List
 
-from mockingbird.__base import __BaseDocument
+from ..__base import __BaseDocument
 
 
 class __BaseStructuredDataType(__BaseDocument, ABC):
@@ -30,9 +30,9 @@ class __BaseStructuredDataType(__BaseDocument, ABC):
     """
 
     @abstractmethod
-    def __init__(self, extension=None):
+    def __init__(self, extension=None, config_file=None):
 
-        super().__init__(extension=extension)
+        super().__init__(extension=extension, config_file=config_file)
         # member variables declaration
         self._dictionary_size: int
         self._entries_range: int

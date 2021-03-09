@@ -16,35 +16,23 @@
 
 from typing import final
 
-from pyexcel_ods import save_data
+import pandavro
 
-from .__base import __BaseStructuredDataType
+from .__base import __BasePandaDocument
 
 
-class ODSDocument(__BaseStructuredDataType):
-    EXT = "ods"
+class AvroDocument(__BasePandaDocument):
 
-    @final
+    EXT = "avro"
+
     def __init__(self, config_file=None):
-        super().__init__(extension=ODSDocument.EXT, config_file=config_file)
+        super().__init__(extension=AvroDocument.EXT, config_file=config_file)
 
     @final
     def save(self, save_path: str) -> None:
+        save_file = self.setup_save_file(save_path=save_path, extension="avro")
 
-        save_file = self.setup_save_file(save_path=save_path, extension=self.extension)
-        structured_array = self._get_structured_data()
+        df = self._get_data_frame()
+        pandavro.to_avro(save_file, df)
 
-        formatted_array = []
-        first_row = True
-
-        for line in structured_array:
-            if first_row:
-                # write header first
-                header = list(line.keys())
-                formatted_array.append(header)
-                first_row = False
-
-            formatted_array.append(list(line.values()))
-
-        save_data(save_file, formatted_array)
         self._log_save(save_file)

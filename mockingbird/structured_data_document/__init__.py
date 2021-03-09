@@ -14,7 +14,8 @@
 # limitations under the License.
 #
 
-from .avro_document import AvroDocument
+from .panda_documents.parquet_document import ParquetDocument
+from .panda_documents.avro_document import AvroDocument
 from .csv_document import CSVDocument
 from .json_document import JSONDocument
 from .kubernetes_log_document import KubernetesLogDocument
@@ -23,7 +24,7 @@ from .xlsx_document import XLSXDocument
 from .yaml_document import YAMLDocument
 
 __all__ = ['CSVDocument', 'JSONDocument', 'KubernetesLogDocument', 'ODSDocument', 'XLSXDocument', 'YAMLDocument',
-           'AvroDocument']
+           'AvroDocument', 'ParquetDocument']
 
 __all_classes__ = [CSVDocument, JSONDocument, KubernetesLogDocument, ODSDocument, XLSXDocument, YAMLDocument,
-                   AvroDocument]
+                   AvroDocument, ParquetDocument]
