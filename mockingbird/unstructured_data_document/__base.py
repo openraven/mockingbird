@@ -17,7 +17,7 @@
 from abc import ABC, abstractmethod
 from typing import List, Tuple
 
-from mockingbird.__base import __BaseDocument
+from ..__base import __BaseDocument
 
 
 class __BaseUnstructuredDataType(__BaseDocument, ABC):
