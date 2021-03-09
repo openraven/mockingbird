@@ -21,7 +21,6 @@ from .__base import __BaseStructuredDataType
 
 
 class CSVDocument(__BaseStructuredDataType):
-
     EXT = "csv"
 
     @final

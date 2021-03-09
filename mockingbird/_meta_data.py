@@ -50,7 +50,8 @@ class _MetaData:
         @param fabricated_count: A dictionary containing how many fabricated-types were injected into the file,
                                  i.e {"ssn": 50, "itin": 30}
         """
-        assert file_name not in (self._meta_data_dict or self._file_size_dict), "Error, filename %s has already been used." % file_name
+        assert file_name not in (
+                    self._meta_data_dict or self._file_size_dict), "Error, filename %s has already been used." % file_name
         # assert file_name not in self._file_size_dict, "Error, filename %s has already been used." % file_name
 
         file_size = os.path.getsize(file_name)
