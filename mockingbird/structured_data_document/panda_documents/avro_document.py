@@ -17,12 +17,10 @@
 from typing import final
 
 import pandavro
+from .__base import __BaseStructuredDataType
 
-from .__base import __BasePandaDocument
 
-
-class AvroDocument(__BasePandaDocument):
-
+class AvroDocument(__BaseStructuredDataType):
     EXT = "avro"
 
     def __init__(self, config_file=None):
