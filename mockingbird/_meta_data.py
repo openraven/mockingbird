@@ -18,7 +18,6 @@ from __future__ import annotations
 
 import io
 import json
-import os
 from collections import defaultdict
 
 
@@ -37,7 +36,6 @@ class _MetaData:
 
     def __init__(self):
         self._meta_data_dict = dict()
-        self._file_size_dict = dict()
 
     def __len__(self):
         return len(self._meta_data_dict)
@@ -50,13 +48,9 @@ class _MetaData:
         @param fabricated_count: A dictionary containing how many fabricated-types were injected into the file,
                                  i.e {"ssn": 50, "itin": 30}
         """
-        assert file_name not in (
-                    self._meta_data_dict or self._file_size_dict), "Error, filename %s has already been used." % file_name
-        # assert file_name not in self._file_size_dict, "Error, filename %s has already been used." % file_name
 
-        file_size = os.path.getsize(file_name)
+        assert file_name not in self._meta_data_dict, "Error, filename has already been used."
 
-        self._file_size_dict[file_name] = file_size
         self._meta_data_dict[file_name] = fabricated_count
 
     def add_other_meta_data(self, other: _MetaData) -> None:
@@ -139,7 +133,6 @@ class _MetaData:
 
         meta_data_dict = dict()
         meta_data_dict["total_fabricated_files"] = len(self._meta_data_dict.keys())
-        meta_data_dict["total_size_bytes"] = sum(self._file_size_dict.values())
 
         collective_fabricated_data = defaultdict(lambda: 0, dict())
         for file in self._meta_data_dict.keys():
@@ -151,6 +144,5 @@ class _MetaData:
 
         meta_data_dict["total_fabricated_entries"] = dict(collective_fabricated_data)
         meta_data_dict["fabricated_files"] = self._meta_data_dict
-        meta_data_dict["file_sizes_bytes"] = self._file_size_dict
 
         return meta_data_dict

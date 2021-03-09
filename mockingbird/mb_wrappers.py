@@ -20,8 +20,9 @@ from itertools import product
 from tempfile import NamedTemporaryFile
 from typing import List
 
-from . import Mockingbird
-from .mockaroo_csv_api import MockarooCsvAPI
+from mockingbird import Mockingbird
+from mockingbird.configurable.yaml_settings_loader import load_yaml_settings
+from mockingbird.mockaroo_csv_api import MockarooCsvAPI
 
 
 class MockingbirdFromCSV(Mockingbird):

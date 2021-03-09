@@ -19,15 +19,14 @@ from typing import final
 
 from openpyxl import Workbook
 
-from .__base import __BaseStructuredDataType
+from mockingbird.structured_data_document.__base import __BaseStructuredDataType
 
 
 class XLSXDocument(__BaseStructuredDataType):
-    EXT = "xlsx"
 
     @final
-    def __init__(self, config_file=None):
-        super().__init__(extension=XLSXDocument.EXT, config_file=config_file)
+    def __init__(self):
+        super().__init__(extension="xlsx")
 
     @final
     def save(self, save_path: str) -> None:

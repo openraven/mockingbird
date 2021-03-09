@@ -21,8 +21,8 @@ from tempfile import NamedTemporaryFile
 
 import requests
 
-from . import Mockingbird
-from .mb_wrappers import MockingbirdFromCSV, MockingbirdFromMockaroo
+from mockingbird import Mockingbird
+from mockingbird.mb_wrappers import MockingbirdFromCSV, MockingbirdFromMockaroo
 
 """
 A series of scripts for mockingbird_cli to use. Essentially we get the user's command line arguments
