@@ -10,3 +10,4 @@ pandas==1.2.1
 pandavro==1.6.0
 python-pptx==0.6.18
 pyspark==3.0.1
+pyarrow==3.0.0
