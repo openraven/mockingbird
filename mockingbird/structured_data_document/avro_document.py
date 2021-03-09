@@ -23,7 +23,6 @@ from .__base import __BaseStructuredDataType
 
 
 class AvroDocument(__BaseStructuredDataType):
-
     EXT = "avro"
 
     def __init__(self, config_file=None):
