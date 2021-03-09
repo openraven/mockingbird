@@ -32,7 +32,7 @@ class __BasePandaDocument(__BaseStructuredDataType):
     def __init__(self, extension: str, config_file=None):
         super().__init__(extension=extension, config_file=config_file)
 
-        self.chunk_size = self._configurable_dict["base_document"]["pandas_document"]["chunk_size"]
+        self.chunk_size = self._configurable_dict["base_structured_data"]["pandas_document"]["chunk_size"]
 
     def _get_data_frame(self):
         structured_data = self._get_structured_data()
