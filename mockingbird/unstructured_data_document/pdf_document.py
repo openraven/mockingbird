@@ -32,7 +32,6 @@ class PDFDocument(__BaseDocument):
     def __init__(self, config_file=None):
         super().__init__(extension=PDFDocument.EXT, config_file=config_file)
 
-
         # Create a list of docx formats we're going to export.
         self._docx_styles = []
         active_styles = self._configurable_dict["unstructured_data"]["pdf_document"]["active_styles"]

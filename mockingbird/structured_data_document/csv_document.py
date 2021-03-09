@@ -21,13 +21,11 @@ from .__base import __BaseStructuredDataType
 
 
 class CSVDocument(__BaseStructuredDataType):
-
     EXT = "csv"
 
     @final
     def __init__(self, config_file=None):
         super().__init__(extension=CSVDocument.EXT, config_file=config_file)
-
 
     @final
     def save(self, save_path: str) -> None:
