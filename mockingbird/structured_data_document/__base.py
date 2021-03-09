@@ -19,7 +19,7 @@ from collections import OrderedDict
 from random import randint
 from typing import List
 
-from mockingbird.__base import __BaseDocument
+from ..__base import __BaseDocument
 
 
 class __BaseStructuredDataType(__BaseDocument, ABC):
