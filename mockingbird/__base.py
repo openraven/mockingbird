@@ -15,6 +15,7 @@
 #
 from __future__ import annotations
 
+import copy
 import os
 import pathlib
 import random
@@ -63,8 +64,18 @@ class __BaseDocument(ABC):
 
         # load the user defined config
         else:
-            with open(self._config_file) as fh:
-                self._configurable_dict = yaml.load(fh, Loader=yaml.FullLoader)
+            # load the config file as a string
+            if type(self._config_file) is str:
+                with open(self._config_file) as fh:
+                    self._configurable_dict = yaml.load(fh, Loader=yaml.FullLoader)
+
+            # copy the config if it is a dictionary
+            if type(self._config_file) is dict:
+                self._configurable_dict = copy.copy(self._config_file)
+
+            # raise an exception otherwise
+            else:
+                raise TypeError("Invalid config_file type. Received %s expected a dict or a str" % type(config_file))
 
         self.__upper_bound_delta = self._configurable_dict["base_document"]["upper_bounds_delta"]
         self._total_entries = self._get_random_bounded_value()
@@ -118,6 +129,10 @@ class __BaseDocument(ABC):
         This documents meta-data to disk.
         """
         self._meta_data_object.dump(output_file=output_file)
+
+    @property
+    def metadata(self):
+        return self._meta_data_object.get_meta_data()
 
     @final
     def setup_save_file(self, save_path: str, extension: str, optional_decorator="") -> str:
