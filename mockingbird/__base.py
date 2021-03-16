@@ -127,6 +127,10 @@ class __BaseDocument(ABC):
         """
         self._meta_data_object.dump(output_file=output_file)
 
+    @property
+    def metadata(self):
+        return self._meta_data_object.get_meta_data()
+
     @final
     def setup_save_file(self, save_path: str, extension: str, optional_decorator="") -> str:
         """
