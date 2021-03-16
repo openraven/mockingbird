@@ -15,6 +15,7 @@
 #
 from __future__ import annotations
 
+import copy
 import os
 import pathlib
 import random
@@ -64,12 +65,14 @@ class __BaseDocument(ABC):
         # load the user defined config
         else:
             # load the config file as a string
-            if self._config_file is str:
+            if type(self._config_file) is str:
                 with open(self._config_file) as fh:
                     self._configurable_dict = yaml.load(fh, Loader=yaml.FullLoader)
+
             # copy the config if it is a dictionary
-            if self._config_file is dict:
-                pass
+            if type(self._config_file) is dict:
+                self._configurable_dict = copy.copy(self._config_file)
+
             # raise an exception otherwise
             else:
                 raise TypeError("Invalid config_file type. Received %s expected a dict or a str" % type(config_file))
