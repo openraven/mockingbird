@@ -97,6 +97,22 @@ class SizedConfigMaker:
         # Return a new config with the scaled config.
         return self._apply_delta_to_config(scale_factor)
 
+    def _re_compute_all_extensions(self) -> None:
+        """
+        A nifty script to generate lookup charts for all extensions.
+
+        Be sure to enable _dump_recompute_values if you're trying to use this method generating a new re-compute set.
+        """
+
+        # Get a list of all the extensions Mockingbird currently supports.
+        for item in Mockingbird().all_documents:
+
+            if not self._dump_recompute_values:
+                print("warn: self._dump_recompute_values is false.")
+
+            self._re_compute(item.EXT)
+
+
     def _re_compute(self, ext: str) -> Tuple[list, list]:
         """
         Re-computes the lookup table for a given extension. Modify the '_dump_recompute_values' variable to True
