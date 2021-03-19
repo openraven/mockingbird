@@ -126,6 +126,7 @@ class SizedConfigMaker:
         y_axis = []
 
         for x in range(self._sample_size):
+            print("%d of %d" % (len(x_axis), self._sample_size))
             delta = x * self._sample_distance
             x_axis.append(delta)
             y_axis.append(self._get_size_of_step(delta=delta, extension=ext))
