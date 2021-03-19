@@ -27,6 +27,7 @@ import yaml
 from random_words import RandomWords
 
 from ._meta_data import _MetaData
+from .random_data_generator import RandomDataGenerator
 
 
 class __BaseDocument(ABC):
@@ -38,6 +39,7 @@ class __BaseDocument(ABC):
 
     # Static variables
     rw = RandomWords()
+    RANDOMDATA = RandomDataGenerator()
 
     @abstractmethod
     def __init__(self, extension=None, config_file=None):
@@ -82,6 +84,7 @@ class __BaseDocument(ABC):
 
         self.__fabricated_count = defaultdict(lambda: 0, dict())  # Set zero's for every value in dict
         self._meta_data_object = _MetaData()
+
 
     # Public Methods #
 
@@ -233,10 +236,13 @@ class __BaseDocument(ABC):
 
         @return: String containing random non-sensitive information.
         """
-        if random.randint(0, 1) == 0:
-            return self.rw.random_word()
+        return random.choice(self.RANDOMDATA.data_set)
 
-        return str(random.getrandbits(random.randint(1, 50)))
+
+    @final
+    def _get_n_random_words(self, n: int) -> List[str]:
+        return random.sample(self.RANDOMDATA.data_set,n)
+
 
     # Private Methods #
 
