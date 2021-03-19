@@ -112,7 +112,6 @@ class SizedConfigMaker:
 
             self._re_compute(item.EXT)
 
-
     def _re_compute(self, ext: str) -> Tuple[list, list]:
         """
         Re-computes the lookup table for a given extension. Modify the '_dump_recompute_values' variable to True

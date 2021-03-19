@@ -85,7 +85,6 @@ class __BaseDocument(ABC):
         self.__fabricated_count = defaultdict(lambda: 0, dict())  # Set zero's for every value in dict
         self._meta_data_object = _MetaData()
 
-
     # Public Methods #
 
     @abstractmethod
@@ -238,11 +237,9 @@ class __BaseDocument(ABC):
         """
         return random.choice(self.RANDOMDATA.data_set)
 
-
     @final
     def _get_n_random_words(self, n: int) -> List[str]:
-        return random.sample(self.RANDOMDATA.data_set,n)
-
+        return random.sample(self.RANDOMDATA.data_set, n)
 
     # Private Methods #
 

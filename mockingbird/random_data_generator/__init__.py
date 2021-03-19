@@ -1,9 +1,9 @@
 import glob
 import os
 import pathlib
-import re
 import random
-from typing import List, Set
+import re
+from typing import Set
 
 
 class RandomDataGenerator:
@@ -13,14 +13,13 @@ class RandomDataGenerator:
         Loads the files found in folder_path and puts them into memory to be used as random seed data to be embedded
         within various documents.
         """
-        if glob_path == None:
+        if glob_path is None:
             glob_path = os.path.join(pathlib.Path(__file__).parent.absolute(), "./books/*.txt")
 
         word_set = self.__extract_strings_from_folder(glob_path)
         number_set = self.__generate_number_set(len(word_set), random_int_upper_bound)
 
         self.data_set = list(word_set.union(number_set))
-
 
     @staticmethod
     def __generate_number_set(count: int, upper_bound: int) -> Set[str]:
