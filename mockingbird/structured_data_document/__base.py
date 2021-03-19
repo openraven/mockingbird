@@ -65,13 +65,13 @@ class __BaseStructuredDataType(__BaseDocument, ABC):
 
         # keep each row having the same keyword entry
         header_keywords = []
-        for x in range(self._entries_range):
+        for x in range(self._dictionary_size):
             header_keywords.append(self._get_random_word())
 
         for item in range(self._entries_range):
 
             ordered_dict = OrderedDict()
-            for x in range(self._entries_range):
+            for x in range(self._dictionary_size):
 
                 if x in pii_entries:
                     keyword = pii_entries[x]
