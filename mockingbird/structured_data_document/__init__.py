@@ -20,7 +20,7 @@ from .kubernetes_log_document import KubernetesLogDocument
 from .ods_document import ODSDocument
 from .panda_documents.avro_document import AvroDocument
 from .panda_documents.parquet_document import ParquetDocument
-from .xlsx_document import XLSXDocument
+from .panda_documents.xlsx_document import XLSXDocument
 from .yaml_document import YAMLDocument
 
 __all__ = ['CSVDocument', 'JSONDocument', 'KubernetesLogDocument', 'ODSDocument', 'XLSXDocument', 'YAMLDocument',
