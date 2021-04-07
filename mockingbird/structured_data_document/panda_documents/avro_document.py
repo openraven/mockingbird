@@ -17,6 +17,7 @@
 from typing import final
 
 import pandavro
+
 from .__base import __BaseStructuredDataType
 
 

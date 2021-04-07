@@ -11,7 +11,7 @@ from .. import Mockingbird
 
 
 def mb_to_b_conversion(size: float) -> float:
-    return round(size / (1024 * 1024), 3)
+    return round(size * (1024 * 1024), 3)
 
 
 def _parse_config(path: str) -> Dict[str, Tuple[list, list]]:
@@ -112,7 +112,6 @@ class SizedConfigMaker:
 
             self._re_compute(item.EXT)
 
-
     def _re_compute(self, ext: str) -> Tuple[list, list]:
         """
         Re-computes the lookup table for a given extension. Modify the '_dump_recompute_values' variable to True
@@ -152,7 +151,7 @@ class SizedConfigMaker:
         with TemporaryDirectory() as temp_dir:
             new_config = self._apply_delta_to_config(delta)
 
-            mockingbird_test = Mockingbird(config_file=new_config, file_minimum=3)
+            mockingbird_test = Mockingbird(config_file=new_config, file_minimum=90)
             mockingbird_test.add_sensitive_data("ssn", ["555-02-3333"])
             mockingbird_test.set_file_extensions(extensions=[extension])
             mockingbird_test.save(temp_dir)

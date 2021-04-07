@@ -20,7 +20,6 @@ from ..panda_documents.__base import __BasePandaDocument
 
 
 class ParquetDocument(__BasePandaDocument):
-
     EXT = "parquet"
 
     def __init__(self, config_file=None):
