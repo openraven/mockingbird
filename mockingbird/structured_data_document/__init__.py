@@ -16,7 +16,7 @@
 
 from .csv_document import CSVDocument
 from .json_document import JSONDocument
-from .kubernetes_log_document import KubernetesLogDocument
+from .log_document import KubernetesLogDocument
 from .ods_document import ODSDocument
 from .panda_documents.avro_document import AvroDocument
 from .panda_documents.parquet_document import ParquetDocument
