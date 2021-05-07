@@ -11,8 +11,8 @@ base_structured_data:
   pandas_document:
     chunk_size: 100000
 
-  dictionary_range: [4,50]
-  entries_range: [50,150]
+  dictionary_range: [ 4,50 ]
+  entries_range: [ 50,150 ]
 
 structured_data:
   xlsx_document:
