@@ -13,18 +13,42 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 import random
 from typing import final
 
 from openpyxl import Workbook
 
-from .__base import __BaseStructuredDataType
+from .__base import __BasePandaDocument
+from ..__base import __BaseDocument, __BaseStructuredDataType
 
 
-class XLSXDocument(__BaseStructuredDataType):
+class XLSXDocument(__BaseDocument):
     EXT = "xlsx"
 
+    def __init__(self, config_file=None):
+        super().__init__(extension=XLSXDocument.EXT, config_file=config_file)
+
+        # Create a list of formats we're going to save xlsx files in.
+        self._xlsx_styles = []
+        active_styles = self._configurable_dict["structured_data"]["xlsx_document"]["active_styles"]
+
+        if active_styles["pandas_xlsx_writer"]:
+            self._xlsx_styles.append(_XlsxDocumentPandasXlsxWriterStyle)
+
+        if active_styles["openpyxl"]:
+            self._xlsx_styles.append(_XlsxDocumentOpenPyxlStyle)
+
+    @final
+    def save(self, save_path: str) -> None:
+
+        for style in self._xlsx_styles:
+            instantiated_style = style(config_file=self._config_file)
+            instantiated_style.clone_sensitive_data(other=self)
+            instantiated_style.save(save_path=save_path)
+            self._meta_data_object.add_other_meta_data(instantiated_style._meta_data_object)
+
+
+class _XlsxDocumentOpenPyxlStyle(__BaseStructuredDataType):
     @final
     def __init__(self, config_file=None):
         super().__init__(extension=XLSXDocument.EXT, config_file=config_file)
@@ -37,7 +61,7 @@ class XLSXDocument(__BaseStructuredDataType):
         """
 
         # How many pages for the excel file
-        pages = random.randint(1, 10)  # todo, add to config / support for th is
+        pages = random.randint(1, 10)  # todo, add to config / support for this
         pii_page = random.randint(0, pages - 1)
 
         save_file = self.setup_save_file(save_path=save_path, extension=self.extension)
@@ -64,4 +88,22 @@ class XLSXDocument(__BaseStructuredDataType):
                 ws.append(list(line.values()))
 
         wb.save(save_file)
+        self._log_save(save_file)
+
+
+class _XlsxDocumentPandasXlsxWriterStyle(__BasePandaDocument):
+    """
+    Writes an xlsx document using Pandas dataframes and the xlsxwriter library.
+    """
+
+    def __init__(self, config_file=None):
+        super().__init__(XLSXDocument.EXT, config_file)
+
+    @final
+    def save(self, save_path: str) -> None:
+        save_file = self.setup_save_file(save_path=save_path, extension=self.extension)
+
+        dataframe = self._get_data_frame()
+        dataframe.to_excel(save_file, engine="xlsxwriter")
+
         self._log_save(save_file)

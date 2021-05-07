@@ -14,6 +14,13 @@ base_structured_data:
   dictionary_range: [4,50]
   entries_range: [50,150]
 
+structured_data:
+  xlsx_document:
+    active_styles:
+      pandas_xlsx_writer: True
+      openpyxl: True
+
+
 # configurable settings for any latex derived document (docx, pdf, etc)
 unstructured_data:
   docx_document:
