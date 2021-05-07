@@ -21,18 +21,18 @@ from typing import final
 from .__base import __BaseStructuredDataType
 
 
-class KubernetesLogDocument(__BaseStructuredDataType):
+class LogDocument(__BaseStructuredDataType):
     EXT = "log"
 
     @final
     def __init__(self, config_file=None):
-        super().__init__(extension=KubernetesLogDocument.EXT, config_file=config_file)
+        super().__init__(extension=LogDocument.EXT, config_file=config_file)
         self.__line_wrap = random.randint(80, 150)
 
     @final
     def save(self, save_path: str) -> None:
         """
-        Dumps a simulated log file in a generic java framework, with the sensitive data being leaked in a
+        Dumps a simulated log file of a generic java framework, with the sensitive data being leaked in a
         json-serializable payload.
         """
 
@@ -56,18 +56,18 @@ class KubernetesLogDocument(__BaseStructuredDataType):
             f.write("\n")
             for line in structured_array:
 
-                arg_dump = f"Apr 09 08:37:39.828Z | production-env-837-deer-k84 | localhost - - [WARN] Unhandled " \
-                           f"exception type IOException: Dumping Object in Exception: \"" \
-                           f"payload\": {json.dumps(json.dumps(line))} "
+                # Create the log statement that will dump the payload
+                payload_dump = f"Apr 09 08:37:39.828Z | production-env-837-deer-k84 | localhost - - [WARN] Unhandled " \
+                               f"exception type IOException: Dumping Object in Exception: \"" \
+                               f"payload\": {json.dumps(json.dumps(line))} "
 
+                # Split the dumped arg out into self.__line_wrap characters.
                 wrapper = textwrap.TextWrapper(width=self.__line_wrap)
-
-                wrapped_dump = wrapper.wrap(text=arg_dump)
-
+                wrapped_dump = wrapper.wrap(text=payload_dump)
                 for wrap_line in wrapped_dump:
                     f.write(wrap_line + "\n")
 
-                for _ in range(random.randint(2, 5)):
+                for _ in range(random.randint(2, 5)):  # Write some normal-ish log statements to break up the file
                     f.write("Apr 09 08:37:39.828Z | production-env-837-deer-k84 | localhost - - [INFO] All looks "
                             "normal.\n")
 
