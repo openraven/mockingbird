@@ -67,7 +67,7 @@ class KubernetesLogDocument(__BaseStructuredDataType):
                 for wrap_line in wrapped_dump:
                     f.write(wrap_line + "\n")
 
-                for _ in range(random.randint(2,5)):
+                for _ in range(random.randint(2, 5)):
                     f.write("Apr 09 08:37:39.828Z | production-env-837-deer-k84 | localhost - - [INFO] All looks "
                             "normal.\n")
 
