@@ -25,14 +25,15 @@ def basic_example():
     fab = Mockingbird()
 
     # Set which file extensions to output
-    fab.set_file_extensions(["html", "docx", "yaml", "xlsx", "odt"])
+    fab.set_file_extensions(["docx", "yaml", "xlsx", "parquet", "avro"])
 
-    # Input the data we want to test / inject into the documents
-    fab.add_sensitive_data(keyword="ssn", entries=["000-000-0000", "999-999-9999"])
-    fab.add_sensitive_data(keyword="dob", entries=["01/01/1991", "02/02/1992"])
+    # # Input the data we want to test / inject into the documents
+    # fab.add_sensitive_data(keyword="ssn", entries=["000-000-0000", "999-999-9999"])
+    # fab.add_sensitive_data(keyword="dob", entries=["01/01/1991", "02/02/1992"])
 
     # Generate and save the fabricated documents
-    fab.save(save_path="./output_basic/")
+    for _ in range(10):
+        fab.save(save_path="./output_basic/")
     fab.dump_meta_data(output_file="./output_basic/meta_data.json")
 
 
