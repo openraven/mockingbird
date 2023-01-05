@@ -15,16 +15,19 @@
 #
 from __future__ import annotations
 
+import copy
 import os
+import pathlib
 import random
 from abc import ABC, abstractmethod
 from collections import defaultdict
 from typing import final, List, Dict
 
+import yaml
 from random_words import RandomWords
 
-from mockingbird._meta_data import _MetaData
-from mockingbird.configurable.yaml_settings_loader import load_yaml_settings
+from ._meta_data import _MetaData
+from .random_data_generator import RandomDataGenerator
 
 
 class __BaseDocument(ABC):
@@ -36,9 +39,10 @@ class __BaseDocument(ABC):
 
     # Static variables
     rw = RandomWords()
+    RANDOMDATA = RandomDataGenerator()
 
     @abstractmethod
-    def __init__(self, extension=None):
+    def __init__(self, extension=None, config_file=None):
 
         if not extension:
             raise Exception("__BaseDocument extension not set")
@@ -50,14 +54,35 @@ class __BaseDocument(ABC):
         self._sensitive_data_mappings = dict()
 
         # lower and upper bounds for _total_entries
-        self._configurable_settings_name = "_default_config.yml"
         self._configurable_dict: Dict[str, str]
         self.__upper_bound_delta: int
         self._total_entries: int = 0
 
-        self.__fabricated_count = defaultdict(lambda: 0, dict())  # Set zero's for every value in dict
-        self.__init_bounds()
+        self._config_file = config_file
 
+        # load the default config found in this folder if not set at a higher level
+        if self._config_file is None:
+            self._configurable_dict = self.__load_default_yaml()
+
+        # load the user defined config
+        else:
+            # load the config file as a string
+            if type(self._config_file) is str:
+                with open(self._config_file) as fh:
+                    self._configurable_dict = yaml.load(fh, Loader=yaml.FullLoader)
+
+            # copy the config if it is a dictionary
+            if type(self._config_file) is dict:
+                self._configurable_dict = copy.copy(self._config_file)
+
+            # raise an exception otherwise
+            else:
+                raise TypeError("Invalid config_file type. Received %s expected a dict or a str" % type(config_file))
+
+        self.__upper_bound_delta = self._configurable_dict["base_document"]["upper_bounds_delta"]
+        self._total_entries = self._get_random_bounded_value()
+
+        self.__fabricated_count = defaultdict(lambda: 0, dict())  # Set zero's for every value in dict
         self._meta_data_object = _MetaData()
 
     # Public Methods #
@@ -106,6 +131,10 @@ class __BaseDocument(ABC):
         This documents meta-data to disk.
         """
         self._meta_data_object.dump(output_file=output_file)
+
+    @property
+    def metadata(self):
+        return self._meta_data_object.get_meta_data()
 
     @final
     def setup_save_file(self, save_path: str, extension: str, optional_decorator="") -> str:
@@ -206,20 +235,26 @@ class __BaseDocument(ABC):
 
         @return: String containing random non-sensitive information.
         """
-        if random.randint(0, 1) == 0:
-            return self.rw.random_word()
+        return random.choice(self.RANDOMDATA.data_set)
 
-        return str(random.getrandbits(random.randint(1, 50)))
+    @final
+    def _get_n_random_words(self, n: int) -> List[str]:
+        return random.sample(self.RANDOMDATA.data_set, n)
 
     # Private Methods #
 
     @final
-    def __init_bounds(self) -> None:
+    def __load_default_yaml(self) -> dict:
         """
-        Initialize the bounds. This may be done multiple times / isn't only called by the constructor, since
-        the bounds can be updated if more sensitive-data is added, or if a different configuration-file is loaded.
-        """
-        self._configurable_dict = load_yaml_settings(self._configurable_settings_name)
+        Loads the _default_config.yml file found in the same directory as __BaseDocument
 
-        self.__upper_bound_delta = self._configurable_dict["base_document"]["upper_bounds_delta"]
-        self._total_entries = self._get_random_bounded_value()
+        @return Dictionary containing __default_config.yml
+        """
+
+        file_path = os.path.join(pathlib.Path(__file__).parent.absolute(), "_default_config.yml")
+
+        assert os.path.exists(file_path)
+        with open(file_path) as fh:
+            settings_yaml = yaml.load(fh, Loader=yaml.FullLoader)
+
+        return settings_yaml

@@ -16,24 +16,22 @@
 
 from typing import final
 
-import pandas
 import pandavro
 
-from mockingbird.structured_data_document.__base import __BaseStructuredDataType
+from .__base import __BaseStructuredDataType
 
 
 class AvroDocument(__BaseStructuredDataType):
+    EXT = "avro"
 
-    def __init__(self):
-        super().__init__(extension="avro")
+    def __init__(self, config_file=None):
+        super().__init__(extension=AvroDocument.EXT, config_file=config_file)
 
     @final
     def save(self, save_path: str) -> None:
         save_file = self.setup_save_file(save_path=save_path, extension="avro")
 
-        structured_data = self._get_structured_data()
-
-        dataframe = pandas.DataFrame.from_dict(structured_data)
-        pandavro.to_avro(save_file, dataframe)
+        df = self._get_data_frame()
+        pandavro.to_avro(save_file, df)
 
         self._log_save(save_file)

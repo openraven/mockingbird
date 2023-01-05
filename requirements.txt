@@ -5,6 +5,8 @@ pyexcel-ods==0.6.0
 requests==2.25.0
 python-docx==0.8.11
 setuptools~=51.0.0
+pyarrow==3.0.0
+numpy~=1.19.5
 reportlab==3.6.12
 pandas==1.5.2
 pandavro==1.7.1

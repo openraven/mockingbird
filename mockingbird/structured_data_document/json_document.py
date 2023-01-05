@@ -18,14 +18,15 @@ import json
 import random
 from typing import final
 
-from mockingbird.structured_data_document.__base import __BaseStructuredDataType
+from .__base import __BaseStructuredDataType
 
 
 class JSONDocument(__BaseStructuredDataType):
+    EXT = "json"
 
     @final
-    def __init__(self):
-        super().__init__(extension="json")
+    def __init__(self, config_file=None):
+        super().__init__(extension=JSONDocument.EXT, config_file=config_file)
 
         # todo, add to configurable
         self.indent = random.randint(0, 25)  # formatting stuff
@@ -55,12 +56,10 @@ class JSONDocument(__BaseStructuredDataType):
 
     def _save_style_2(self, json_object: list, save_dir: str):
         """
-        "Incorrectly" save the json, no pretty printing and incorrect escape characters. Saves the way logs sometimes
-        print in kubernetes logs.
+        Writes a json without any "pretty-printing" styled indentations
         """
 
-        with open(save_dir, "a") as f:
-            string_rep = json.dumps(json.dumps(json_object), indent=self.indent)
-            f.write(string_rep)
+        with open(save_dir, "w") as f:
+            json.dump(json_object, f)
 
         self._log_save(save_dir)

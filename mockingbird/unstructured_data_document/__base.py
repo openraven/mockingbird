@@ -17,7 +17,7 @@
 from abc import ABC, abstractmethod
 from typing import List, Tuple
 
-from mockingbird.__base import __BaseDocument
+from ..__base import __BaseDocument
 
 
 class __BaseUnstructuredDataType(__BaseDocument, ABC):
@@ -27,8 +27,8 @@ class __BaseUnstructuredDataType(__BaseDocument, ABC):
     repeated functions.
     """
 
-    def __init__(self, extension=None):
-        super().__init__(extension=extension)
+    def __init__(self, extension=None, config_file=None):
+        super().__init__(extension=extension, config_file=config_file)
 
         # todo
         self._enumerated_bounds = 10
