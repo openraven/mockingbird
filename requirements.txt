@@ -1,11 +1,11 @@
-openpyxl==3.0.10
+openpyxl==3.1.2
 RandomWords==0.3.0
-pyyaml==6.0
+pyyaml==6.0.1
 pyexcel-ods==0.6.0
 requests==2.25.0
 python-docx==0.8.11
 setuptools~=51.0.0
-pyarrow==10.0.1
+pyarrow==14.0.2
 numpy>=1.19.5
 reportlab==3.6.12
 pandas==1.5.2
