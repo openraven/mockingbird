@@ -7,7 +7,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(name='mockingbird',
-      version='1.1.1',
+      version='1.1.2',
       description='Generate mock documents in various formats (CSV, DOCX, PDF, TXT, and more) that embed seed data and '
                   'can be used to test data classification software.',
 
